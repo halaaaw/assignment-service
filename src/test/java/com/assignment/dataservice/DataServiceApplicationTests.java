@@ -1,4 +1,4 @@
-package com.rapidminer.task.dataservice;
+package com.assignment.dataservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

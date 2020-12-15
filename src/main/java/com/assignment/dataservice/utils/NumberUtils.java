@@ -1,4 +1,4 @@
-package com.rapidminer.task.dataservice.utils;
+package com.assignment.dataservice.utils;
 
 import java.util.Arrays;
 

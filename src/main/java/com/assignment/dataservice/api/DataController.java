@@ -1,4 +1,4 @@
-package com.rapidminer.task.dataservice.api;
+package com.assignment.dataservice.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.assignment.dataservice.utils.NumberUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.rapidminer.task.dataservice.utils.NumberUtils;
 
 @RestController
 public class DataController {

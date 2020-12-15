@@ -1,4 +1,4 @@
-package com.rapidminer.task.dataservice;
+package com.assignment.dataservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
