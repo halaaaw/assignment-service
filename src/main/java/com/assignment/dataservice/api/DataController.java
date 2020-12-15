@@ -1,28 +1,39 @@
 package com.assignment.dataservice.api;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.assignment.dataservice.persistence.entities.ServiceRequest;
+import com.assignment.dataservice.services.ServiceRequestsService;
 import com.assignment.dataservice.utils.NumberUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/data")
 public class DataController {
 
   private static final String LABEL = "label";
+  private static final String API_MEDIAN = "median";
+  @Autowired
+  private ServiceRequestsService serviceRequestsService;
 
-  @CrossOrigin(origins = "http://localhost:3000")
-  @PostMapping(path = "/median", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<String> median(@RequestBody String contentEntity,
+  @PostMapping(path = "/median/{fileName}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<String> median(@PathVariable String fileName,
+      @RequestBody String contentEntity,
       HttpServletRequest servletRequest) {
     Gson gson = new Gson();
     // TODO validate received data
@@ -68,8 +79,11 @@ public class DataController {
       finalResults.add(row);
     });
     System.out.println(finalResults);
-
-    return ResponseEntity.ok(gson.toJson(finalResults));
+    String responseBody = gson.toJson(finalResults);
+    ServiceRequest request =
+        new ServiceRequest(API_MEDIAN, contentEntity, responseBody, "todo", new Date(), fileName);
+    serviceRequestsService.saveServiceRequest(request);
+    return ResponseEntity.ok(responseBody);
   }
 
 
