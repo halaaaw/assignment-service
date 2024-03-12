@@ -14,4 +14,5 @@ import com.assignment.dataservice.persistence.entities.ServiceRequest;
 @Repository
 public interface ServiceRequestJpaRepository extends JpaRepository<ServiceRequest, Long> {
   List<ServiceRequest> findByApiName(String apiName);
+  String compilationErrorOnPurpose = ???
 }
